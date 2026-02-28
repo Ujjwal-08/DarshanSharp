@@ -1,112 +1,233 @@
-# Darshan Media Player README
+# Darshan Player
 
-## Overview
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stars][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![License][license-shield]][license-url]
 
-Darshan is a libre and open source media player and multimedia engine, tailored for Indian users and regional content while remaining fully cross‑platform.
-It focuses on playing a wide variety of audio and video formats, handling local files, discs, devices, and network streams with an India‑first experience.
+Lightweight open-source desktop media player written in **C#**, focused on simplicity, performance, and ease of use.
 
-Darshan is built as a fork on top of the VLC media engine from the VideoLAN project, inheriting its mature core, codec support, and portability.
-The playback engine can also be embedded into third‑party applications similarly to libVLC, allowing developers to integrate Darshan’s capabilities into their own projects.
+---
 
-## Key Goals
+## ❤️ Support & Donations
 
-- Provide a great out‑of‑the‑box experience for Indian users, with sensible defaults for regional languages and content.
-- Keep the project fully open source and community‑driven.
-- Stay compatible with upstream improvements from the VLC engine wherever possible.
+If you find **Darshan Player** useful and want to support development:
+
+- ⭐ Star the repository
+- 🐛 Report bugs or suggest improvements
+- 🤝 Contribute code, translations, or testing
+
+### 💖 Donate
+
+You can support the project here:
+
+- **Patreon:** https://www.patreon.com/cw/BABU_ISHU  
+- **PayPal:** https://www.paypal.com/ncp/payment/SECBQ62TRZZ6Y
+
+### 💼 Business & Custom Builds
+
+For commercial support, custom builds, or collaboration:
+
+**Email:** help@chapterchase.com
+
+---
+
+## Table of Contents
+
+- [About The Project](#about-the-project)
+- [Features](#features)
+- [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+- [Acknowledgments](#acknowledgments)
+
+---
+
+## About The Project
+
+Darshan Player is a fast and minimal desktop media player built using C#.  
+The goal is to provide reliable playback with a clean interface and lightweight performance.
+
+Key principles:
+
+- Easy local setup
+- Simple and responsive UI
+- Developer-friendly architecture
+- Extensible and customizable
+
+---
+
+## Features
+
+- Smooth video and audio playback
+- Playlist support
+- Forward / backward seeking
+- Fullscreen mode
+- Picture-in-Picture (PiP) style mini player
+- Multiple audio track selection
+- Keyboard-friendly controls
+- Localization support
+- Lightweight desktop performance
+
+---
+
+## Built With
+
+- C#
+- .NET Desktop
+- WPF (Windows Presentation Foundation)
+
+---
+
+## Getting Started
+
+These instructions help you run Darshan Player locally.
+
+### Prerequisites
+
+- Windows OS
+- .NET SDK (recommended: .NET 8 or project target version)
+- Visual Studio / Rider / VS Code with C# support
+
+Download .NET SDK:
+
+https://dotnet.microsoft.com/download
+
+---
+
+### Installation
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/ujjwal-08/darshan-player.git
+cd darshan-player
+````
+
+2. Restore dependencies
+
+```bash
+dotnet restore
+```
+
+3. Build the project
+
+```bash
+dotnet build
+```
+
+4. Run the application
+
+```bash
+dotnet run --project src/DarshanPlayer
+```
+
+> Adjust the project path if your structure is different.
+
+---
+
+## Usage
+
+* Open media using **Open File** or drag & drop.
+* Add multiple files into the playlist.
+* Control playback using play, pause, and seek controls.
+* Toggle fullscreen when needed.
+* Use PiP mode to keep video visible while multitasking.
+* Switch audio tracks if available.
+
+---
+
+## Roadmap
+
+* [x] Core playback
+* [x] Playlist system
+* [x] Localization support
+* [x] PiP mode
+* [x] Fullscreen support
+* [ ] Subtitle customization
+* [ ] Configurable shortcuts
+* [ ] Session restore
+* [ ] Advanced playback settings
+* [ ] Cross-platform support (future)
+
+---
+
+## Contributing
+
+Contributions are welcome.
+
+1. Fork the repository
+
+2. Create a feature branch
+
+```bash
+git checkout -b feature/your-feature
+```
+
+3. Commit changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push branch
+
+```bash
+git push origin feature/your-feature
+```
+
+5. Open a Pull Request
+
+---
 
 ## License
 
-Darshan is distributed under the GPLv2 (or later) license, as required by its upstream codebase.
-On some platforms it may effectively behave as GPLv3 due to the licenses of bundled or required dependencies.
+Distributed under the **Unlicense**.
 
-The embeddable playback engine used by Darshan is based on libVLC and therefore follows the LGPLv2 (or later) license for that component.
-This permits integration into third‑party applications that may use other licenses, provided they respect the terms of the LGPL for the engine.
+See the `LICENSE` file for details.
 
-## Platforms
+---
 
-Darshan aims to support the same major desktop and mobile platforms as its upstream engine, subject to build and packaging status:
+## Contact
 
-- Windows (7 and later, including modern Windows 10/11 variants)
-- macOS (10.10 and later)
-- GNU/Linux and related distributions
-- BSD and related systems
-- Android (4.2 and later), including Android TV form factors
-- iOS (9 and later), including iPadOS and Apple TV devices
+**Maintainer:** Ujjwal Dadhich
+**Email:** [help@chapterchase.com](mailto:help@chapterchase.com)
 
-Exact platform support may vary over time depending on available maintainers and build infrastructure.
-Mobile applications for Android and iOS are hosted in separate repositories from the core desktop engine, mirroring the upstream layout.
+Project Repository:
+[https://github.com/ujjwal-08/darshan-player](https://github.com/ujjwal-08/darshan-player)
 
-## India‑Focused Features
+---
 
-Darshan’s main differentiator is its focus on Indian users and media workflows:
+## Acknowledgments
 
-- Better defaults for Indic subtitle fonts and languages.
-- Quick access to folders and libraries commonly used for regional content.
-- UX and theming that reflect Indian aesthetics without compromising usability.
+* Thanks to contributors and testers
 
-These goals are implemented gradually on top of the stable upstream engine so that Darshan remains compatible with a wide range of existing media files and devices.
 
-## Contributing and Community
 
-Darshan is maintained by an open community of developers, designers, packagers, and documentation writers.
-There is no corporate sponsorship; contributions are welcome from anyone who wants to improve the player for Indian and global users.
 
-The core of Darshan continues to be written primarily in C, with additional pieces in C++, Objective‑C, assembly, and Rust, as inherited from the upstream engine.
-Other companion projects or bindings may use languages such as Kotlin/Java for Android, Swift for iOS, and C# for .NET integrations.
 
-Areas where contributions are especially helpful:
 
-- Implementing and refining India‑specific UX features and preferences.
-- Packaging for Windows, macOS, GNU/Linux distributions, and mobile app stores.
-- Writing and updating technical documentation and tutorials.
-- Visual design, iconography, and theming.
-- User support, triaging issues, and community moderation.
+[contributors-shield]: https://img.shields.io/github/contributors/Ujjwal-08/DarshanPlayer.svg?style=for-the-badge
+[contributors-url]: https://github.com/Ujjwal-08/DarshanPlayer/graphs/contributors
 
-## Contribution Workflow
+[forks-shield]: https://img.shields.io/github/forks/Ujjwal-08/DarshanPlayer.svg?style=for-the-badge
+[forks-url]: https://github.com/Ujjwal-08/DarshanPlayer/forks
 
-The recommended workflow is to fork the repository, create a feature branch, and open a Merge Request or Pull Request against the main Darshan project.
-All proposed changes should pass automated checks and receive review discussion before being merged.
+[stars-shield]: https://img.shields.io/github/stars/Ujjwal-08/DarshanPlayer.svg?style=for-the-badge
+[stars-url]: https://github.com/Ujjwal-08/DarshanPlayer/stargazers
 
-For low‑level engine changes, contributors should stay aware of upstream VLC developments so that Darshan can periodically rebase or merge updates cleanly.
-When relevant, improvements that are generally useful may also be proposed back to the VLC project through its own contribution channels.
+[issues-shield]: https://img.shields.io/github/issues/Ujjwal-08/DarshanPlayer.svg?style=for-the-badge
+[issues-url]: https://github.com/Ujjwal-08/DarshanPlayer/issues
 
-## Engine Embedding (libDarshan)
+[license-shield]: https://img.shields.io/github/license/Ujjwal-08/DarshanPlayer.svg?style=for-the-badge
+[license-url]: https://github.com/Ujjwal-08/DarshanPlayer/blob/main/LICENSE
 
-Darshan exposes an embeddable engine, conceptually similar to libVLC, that can be used inside third‑party applications and frameworks.
-The engine supports playback, streaming, and conversion of media files and network streams, making it suitable for richer media experiences.
 
-Bindings can be created for multiple programming languages, including C++, Python, C#, and others, building on top of the underlying VLC‑derived engine APIs.
-Developers are encouraged to contribute or maintain bindings that target popular Indian technology stacks and frameworks.
 
-## Support and Resources
-
-Darshan is still a community project, so support is mostly provided via public channels and documentation.
-Typical resources may include:
-
-- Project website and downloads page.
-- Issue tracker for bug reports and feature requests.
-- Community chat or forum for questions and discussion.
-- Developer documentation and hacking guides inspired by upstream resources.
-
-Because Darshan builds on VLC, upstream documentation, forums, and wikis from the VideoLAN project can remain a valuable reference for low‑level engine behavior and advanced configuration.
-
-## Source Tree Overview
-
-Darshan largely follows the same source tree structure as its upstream engine, with some project‑specific additions.
-A typical layout includes:
-
-- `bin/` – Darshan binaries and launchers.
-- `bindings/` – Language bindings built on top of the embeddable engine.
-- `compat/` – Compatibility helpers for operating systems that lack certain functionality.
-- `contrib/` – Tools for fetching and building third‑party libraries needed by Darshan.
-- `doc/` – Documentation and reference material.
-- `extras/` – Auxiliary build, analysis, and packaging resources.
-- `include/` – Public and internal header files.
-- `lib/` – Source code for the embeddable playback engine.
-- `modules/` – Plugins and modules providing codecs, formats, and interfaces.
-- `po/` – Translation files for Darshan’s user interface.
-- `share/` – Shared assets such as icons and UI resources.
-- `src/` – Core engine code.
-- `test/` – Test suites and harnesses used for continuous integration.
-
-Individual files like `COPYING`, `COPYING.LIB`, `AUTHORS`, and `THANKS` remain important for licensing and attribution, and should be preserved from the upstream project with appropriate updates where necessary.
