@@ -1,0 +1,36 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="str_Open">ತೆರೆ</sys:String>
+    <sys:String x:Key="str_OpenFolder">ಫೋಲ್ಡರ್ ತೆರೆ</sys:String>
+    <sys:String x:Key="str_Play">ಪ್ಲೇ</sys:String>
+    <sys:String x:Key="str_Pause">ವಿರಾಮ</sys:String>
+    <sys:String x:Key="str_Stop">ನಿಲ್ಲಿಸು</sys:String>
+    <sys:String x:Key="str_Previous">ಹಿಂದಿನ</sys:String>
+    <sys:String x:Key="str_Next">ಮುಂದಿನ</sys:String>
+    <sys:String x:Key="str_Volume">ಧ್ವನಿ</sys:String>
+    <sys:String x:Key="str_Mute">ಮ್ಯೂಟ್</sys:String>
+    <sys:String x:Key="str_Playlist">ಪ್ಲೇಲಿಸ್ಟ್</sys:String>
+    <sys:String x:Key="str_Shuffle">ಶಫಲ್</sys:String>
+    <sys:String x:Key="str_Repeat">ಮರುಪ್ಲೇ</sys:String>
+    <sys:String x:Key="str_Speed">ವೇಗ</sys:String>
+    <sys:String x:Key="str_Audio">ಆಡಿಯೋ ಟ್ರ್ಯಾಕ್</sys:String>
+    <sys:String x:Key="str_Subtitle">ಉಪಶೀರ್ಷಿಕೆ</sys:String>
+    <sys:String x:Key="str_LoadSub">ಉಪಶೀರ್ಷಿಕೆ ಲೋಡ್ ಮಾಡಿ</sys:String>
+    <sys:String x:Key="str_Screenshot">ಸ್ಕ್ರೀನ್‌ಶಾಟ್</sys:String>
+    <sys:String x:Key="str_OnTop">ಯಾವಾಗಲೂ ಮೇಲೆ</sys:String>
+    <sys:String x:Key="str_Fullscreen">ಪೂರ್ಣ ಪರದೆ</sys:String>
+    <sys:String x:Key="str_AspectRatio">ಅಸ್ಪೆಕ್ಟ್ ರೇಶಿಯೋ</sys:String>
+    <sys:String x:Key="str_SleepTimer">ಸ್ಲೀಪ್ ಟೈಮರ್</sys:String>
+    <sys:String x:Key="str_Cancel">ರದ್ದು</sys:String>
+    <sys:String x:Key="str_Recent">ಇತ್ತೀಚಿನ ಫೈಲ್‌ಗಳು</sys:String>
+    <sys:String x:Key="str_Language">ಭಾಷೆ</sys:String>
+    <sys:String x:Key="str_NoMedia">ಮೀಡಿಯಾ ಇಲ್ಲ</sys:String>
+    <sys:String x:Key="str_ClearPlaylist">ತೆರವು</sys:String>
+    <sys:String x:Key="str_Remove">ತೆಗೆ</sys:String>
+    <sys:String x:Key="str_5min">5 ನಿಮಿಷ</sys:String>
+    <sys:String x:Key="str_10min">10 ನಿಮಿಷ</sys:String>
+    <sys:String x:Key="str_15min">15 ನಿಮಿಷ</sys:String>
+    <sys:String x:Key="str_30min">30 ನಿಮಿಷ</sys:String>
+    <sys:String x:Key="str_60min">60 ನಿಮಿಷ</sys:String>
+</ResourceDictionary>

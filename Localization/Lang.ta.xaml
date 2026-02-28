@@ -1,0 +1,36 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="str_Open">திற</sys:String>
+    <sys:String x:Key="str_OpenFolder">கோப்புறை திற</sys:String>
+    <sys:String x:Key="str_Play">இயக்கு</sys:String>
+    <sys:String x:Key="str_Pause">இடைநிறுத்து</sys:String>
+    <sys:String x:Key="str_Stop">நிறுத்து</sys:String>
+    <sys:String x:Key="str_Previous">முந்தையது</sys:String>
+    <sys:String x:Key="str_Next">அடுத்தது</sys:String>
+    <sys:String x:Key="str_Volume">ஒலி</sys:String>
+    <sys:String x:Key="str_Mute">முடக்கு</sys:String>
+    <sys:String x:Key="str_Playlist">பாடல் பட்டியல்</sys:String>
+    <sys:String x:Key="str_Shuffle">கலைத்து</sys:String>
+    <sys:String x:Key="str_Repeat">மீண்டும்</sys:String>
+    <sys:String x:Key="str_Speed">வேகம்</sys:String>
+    <sys:String x:Key="str_Audio">ஒலி தடம்</sys:String>
+    <sys:String x:Key="str_Subtitle">வசனம்</sys:String>
+    <sys:String x:Key="str_LoadSub">வசனம் ஏற்று</sys:String>
+    <sys:String x:Key="str_Screenshot">திரைப்படம்</sys:String>
+    <sys:String x:Key="str_OnTop">எப்போதும் மேலே</sys:String>
+    <sys:String x:Key="str_Fullscreen">முழு திரை</sys:String>
+    <sys:String x:Key="str_AspectRatio">விகிதம்</sys:String>
+    <sys:String x:Key="str_SleepTimer">தூக்க நேரம்</sys:String>
+    <sys:String x:Key="str_Cancel">ரத்துசெய்</sys:String>
+    <sys:String x:Key="str_Recent">சமீபத்திய கோப்புகள்</sys:String>
+    <sys:String x:Key="str_Language">மொழி</sys:String>
+    <sys:String x:Key="str_NoMedia">மீடியா இல்லை</sys:String>
+    <sys:String x:Key="str_ClearPlaylist">அழி</sys:String>
+    <sys:String x:Key="str_Remove">நீக்கு</sys:String>
+    <sys:String x:Key="str_5min">5 நிமிடம்</sys:String>
+    <sys:String x:Key="str_10min">10 நிமிடம்</sys:String>
+    <sys:String x:Key="str_15min">15 நிமிடம்</sys:String>
+    <sys:String x:Key="str_30min">30 நிமிடம்</sys:String>
+    <sys:String x:Key="str_60min">60 நிமிடம்</sys:String>
+</ResourceDictionary>

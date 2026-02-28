@@ -1,0 +1,36 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="str_Open">തുറക്കുക</sys:String>
+    <sys:String x:Key="str_OpenFolder">ഫോൾഡർ തുറക്കുക</sys:String>
+    <sys:String x:Key="str_Play">പ്ലേ</sys:String>
+    <sys:String x:Key="str_Pause">നിർത്തുക</sys:String>
+    <sys:String x:Key="str_Stop">അവസാനിപ്പിക്കുക</sys:String>
+    <sys:String x:Key="str_Previous">മുമ്പുള്ളത്</sys:String>
+    <sys:String x:Key="str_Next">അടുത്തത്</sys:String>
+    <sys:String x:Key="str_Volume">ശബ്ദം</sys:String>
+    <sys:String x:Key="str_Mute">മ്യൂട്ട്</sys:String>
+    <sys:String x:Key="str_Playlist">പ്ലേലിസ്റ്റ്</sys:String>
+    <sys:String x:Key="str_Shuffle">ഷഫിൾ</sys:String>
+    <sys:String x:Key="str_Repeat">ആവർത്തിക്കുക</sys:String>
+    <sys:String x:Key="str_Speed">വേഗം</sys:String>
+    <sys:String x:Key="str_Audio">ഓഡിയോ ട്രാക്ക്</sys:String>
+    <sys:String x:Key="str_Subtitle">സബ്ടൈറ്റിൽ</sys:String>
+    <sys:String x:Key="str_LoadSub">സബ്ടൈറ്റിൽ ലോഡ് ചെയ്യുക</sys:String>
+    <sys:String x:Key="str_Screenshot">സ്ക്രീൻഷോട്ട്</sys:String>
+    <sys:String x:Key="str_OnTop">എപ്പോഴും മുകളിൽ</sys:String>
+    <sys:String x:Key="str_Fullscreen">പൂർണ്ണ സ്ക്രീൻ</sys:String>
+    <sys:String x:Key="str_AspectRatio">ആസ്പക്ട് റേഷ്യോ</sys:String>
+    <sys:String x:Key="str_SleepTimer">സ്ലീപ്പ് ടൈമർ</sys:String>
+    <sys:String x:Key="str_Cancel">റദ്ദാക്കുക</sys:String>
+    <sys:String x:Key="str_Recent">സമീപകാല ഫയലുകൾ</sys:String>
+    <sys:String x:Key="str_Language">ഭാഷ</sys:String>
+    <sys:String x:Key="str_NoMedia">മീഡിയ ഇല്ല</sys:String>
+    <sys:String x:Key="str_ClearPlaylist">മായ്ക്കുക</sys:String>
+    <sys:String x:Key="str_Remove">നീക്കം ചെയ്യുക</sys:String>
+    <sys:String x:Key="str_5min">5 മിനിറ്റ്</sys:String>
+    <sys:String x:Key="str_10min">10 മിനിറ്റ്</sys:String>
+    <sys:String x:Key="str_15min">15 മിനിറ്റ്</sys:String>
+    <sys:String x:Key="str_30min">30 മിനിറ്റ്</sys:String>
+    <sys:String x:Key="str_60min">60 മിനിറ്റ്</sys:String>
+</ResourceDictionary>

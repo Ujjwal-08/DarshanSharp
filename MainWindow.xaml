@@ -1,0 +1,364 @@
+﻿<Window x:Class="DarshanPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vlc="clr-namespace:LibVLCSharp.WPF;assembly=LibVLCSharp.WPF"
+        xmlns:vm="clr-namespace:DarshanPlayer.ViewModels"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        Title="Darshan Player"
+        Width="1100" Height="700"
+        WindowStyle="None"
+        AllowsTransparency="False"
+        Background="#111111"
+        Topmost="{Binding AlwaysOnTop}"
+        AllowDrop="True"
+        Drop="Window_Drop"
+        DragOver="Window_DragOver"
+        KeyDown="Window_KeyDown"
+        StateChanged="Window_StateChanged"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        MouseMove="Root_MouseMove"
+        MouseEnter="Root_MouseEnter">
+        
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome CaptionHeight="40"
+                            GlassFrameThickness="0"
+                            CornerRadius="0"
+                            ResizeBorderThickness="4"/>
+    </shell:WindowChrome.WindowChrome>
+
+    <Window.Resources>
+        <ContextMenu x:Key="SleepMenu">
+            <MenuItem Header="{DynamicResource str_5min}"  Click="SleepTimer_5"/>
+            <MenuItem Header="{DynamicResource str_10min}" Click="SleepTimer_10"/>
+            <MenuItem Header="{DynamicResource str_15min}" Click="SleepTimer_15"/>
+            <MenuItem Header="{DynamicResource str_30min}" Click="SleepTimer_30"/>
+            <MenuItem Header="{DynamicResource str_60min}" Click="SleepTimer_60"/>
+            <Separator/>
+            <MenuItem Header="{DynamicResource str_Cancel}" Click="SleepTimer_Cancel"/>
+        </ContextMenu>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource BgDeepBrush}">
+        <!-- Row Definitions for the Main Layout -->
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="TitleRow" Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition x:Name="InfoRow" Height="Auto"/>
+            <RowDefinition x:Name="ControlsRow" Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- TITLE BAR -->
+        <Border x:Name="TitleBar" Grid.Row="0" Background="{StaticResource BgPanelBrush}"
+                MouseLeftButtonDown="TitleBar_MouseDown">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsPipMode}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0">
+                    <TextBlock Text="🎵" FontSize="16" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                    <TextBlock Text="Darshan Player" Foreground="{StaticResource TextPrimaryBrush}"
+                               FontSize="13" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0"
+                            shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Button Style="{StaticResource TextBtn}" Click="MenuOpen_Click">
+                        <TextBlock Text="{DynamicResource str_Open}" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12"/>
+                    </Button>
+                    <Button Style="{StaticResource TextBtn}" Click="MenuOpenFolder_Click">
+                        <TextBlock Text="{DynamicResource str_OpenFolder}" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12"/>
+                    </Button>
+                    <Button Style="{StaticResource TextBtn}" Click="MenuRecent_Click" x:Name="RecentBtn">
+                        <TextBlock Text="{DynamicResource str_Recent}" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12"/>
+                    </Button>
+                    <Button Style="{StaticResource TextBtn}" Click="MenuSleepTimer_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="⏰ " Foreground="{StaticResource TextSecondaryBrush}" FontSize="12"/>
+                            <TextBlock Text="{Binding SleepTimerLabel, Mode=OneWay}" Foreground="{StaticResource AccentLightBrush}" FontSize="12"/>
+                        </StackPanel>
+                    </Button>
+                    <ComboBox Style="{StaticResource DarkCombo}" Width="120" Margin="8,0"
+                               ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}"
+                               DisplayMemberPath="DisplayName" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,4,0"
+                            shell:WindowChrome.IsHitTestVisibleInChrome="True">
+                    <!-- Support Links -->
+                    <Button Style="{StaticResource IconBtn}" Click="BtnSupportPatreon_Click" ToolTip="Support on Patreon" shell:WindowChrome.IsHitTestVisibleInChrome="True" Background="Transparent">
+                        <TextBlock Text="🧡" FontSize="14" IsHitTestVisible="False"/>
+                    </Button>
+                    <Button Style="{StaticResource IconBtn}" Click="BtnSupportPaypal_Click" ToolTip="Support via PayPal" shell:WindowChrome.IsHitTestVisibleInChrome="True" Background="Transparent">
+                        <TextBlock Text="💙" FontSize="14" IsHitTestVisible="False"/>
+                    </Button>
+                    <Separator Width="1" Height="20" Margin="4,0" Background="#33FFFFFF"/>
+                    
+                    <Button Style="{StaticResource IconBtn}" Click="BtnMinimize_Click"><TextBlock Text="─"/></Button>
+                    <Button Style="{StaticResource IconBtn}" Click="BtnMaximize_Click"><TextBlock Text="□"/></Button>
+                    <Button Style="{StaticResource IconBtn}" Click="BtnClose_Click"><TextBlock Text="✕" Foreground="{StaticResource DangerBrush}"/></Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- VIDEO + PLAYLIST AREA -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Video area -->
+          <Grid Grid.Column="0" Background="Black" x:Name="VideoArea"
+      MouseLeftButtonDown="VideoArea_Click"
+      MouseMove="VideoArea_MouseMove"
+      MouseEnter="VideoArea_MouseEnter">
+
+    <vlc:VideoView x:Name="VideoPlayer" IsHitTestVisible="False"/>
+
+    <Border x:Name="DropHintOverlay"
+            Visibility="Collapsed"
+            Background="#AA000000"
+            IsHitTestVisible="False">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="📂" FontSize="48" HorizontalAlignment="Center"/>
+            <TextBlock Text="Drop media files here" FontSize="18" Foreground="White" Margin="0,8,0,0"/>
+        </StackPanel>
+    </Border>
+
+    <Popup x:Name="ControlsPopup"
+           AllowsTransparency="True"
+           StaysOpen="True"
+           Placement="Relative" 
+           PlacementTarget="{Binding ElementName=VideoArea}"
+           HorizontalOffset="0"
+           VerticalOffset="0"
+           IsOpen="False">
+        
+        <Grid x:Name="OverlayEventGrid"
+              Width="{Binding ActualWidth, ElementName=VideoArea}"
+              Height="{Binding ActualHeight, ElementName=VideoArea}"
+              Background="#01000000"
+              MouseMove="OverlayEventGrid_MouseMove"
+              MouseLeftButtonDown="OverlayEventGrid_Click">
+
+            <Grid x:Name="FullscreenOverlay" Visibility="Collapsed">
+                
+                <Button x:Name="ExitFullscreenBtn"
+                        Click="BtnRestore_Click" 
+                        HorizontalAlignment="Right" VerticalAlignment="Top" 
+                        Margin="30" Padding="15,10"
+                        Background="#CC111111" BorderBrush="#44FFFFFF" BorderThickness="1">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="✕" FontSize="18" Foreground="White" FontWeight="Bold"/>
+                        <TextBlock Text=" Exit Fullscreen" Margin="8,0,0,0" Foreground="White" FontSize="13"/>
+                    </StackPanel>
+                </Button>
+
+                <Border VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                        Height="140" Margin="300" Padding="15,10">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                            <GradientStop Color="Transparent" Offset="0"/>
+                            <GradientStop Color="#DD000000" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    
+                    <StackPanel VerticalAlignment="Top">
+                        <Slider Style="{StaticResource SeekSlider}" Margin="0,0,0,15"
+                                Minimum="0" Maximum="{Binding Duration}" Value="{Binding Position, Mode=TwoWay}"
+                                IsMoveToPointEnabled="True"
+                                PreviewMouseDown="SeekBar_PreviewMouseDown" 
+                                PreviewMouseUp="SeekBar_PreviewMouseUp"/>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Top">
+                                <TextBlock Text="{Binding CurrentTimeStr}" Foreground="White" FontSize="14"/>
+                                <TextBlock Text=" / " Foreground="#88FFFFFF" FontSize="14"/>
+                                <TextBlock Text="{Binding DurationStr}" Foreground="#88FFFFFF" FontSize="14"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <Button Command="{Binding SkipBackCommand}" Style="{StaticResource IconBtn}" 
+                                        Content="⏪" FontSize="22" Foreground="White" Margin="10,0"/>
+                                <Button Style="{StaticResource PlayBtn}" Command="{Binding PlayPauseCommand}" 
+                                        Width="60" Height="60" Background="{StaticResource AccentBrush}">
+                                    <TextBlock Text="{Binding PlayPauseIcon}" FontSize="30" Foreground="White" HorizontalAlignment="Center"/>
+                                </Button>
+                                <Button Command="{Binding SkipForwardCommand}" Style="{StaticResource IconBtn}" 
+                                        Content="⏩" FontSize="22" Foreground="White" Margin="10,0"/>
+                            </StackPanel>
+                            
+                            <Rectangle Grid.Column="2" Fill="Transparent"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Border x:Name="PipOverlay" 
+                    Background="#EE111111" Padding="15" CornerRadius="12" 
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Visibility="Collapsed" BorderBrush="#44FFFFFF" BorderThickness="1">
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource PlayBtn}" Command="{Binding PlayPauseCommand}" Width="45" Height="45" Margin="0,0,10,0">
+                        <TextBlock Text="{Binding PlayPauseIcon}" FontSize="22" Foreground="White"/>
+                    </Button>
+                    <Button Style="{StaticResource PlayBtn}" Click="BtnRestore_Click" Width="45" Height="45" Background="#33FFFFFF">
+                        <TextBlock Text="🗗" FontSize="22" Foreground="White"/>
+                    </Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Popup>
+</Grid>
+            <!-- PLAYLIST PANEL -->
+            <Border Grid.Column="1" x:Name="PlaylistPanel" MinWidth="220" MaxWidth="360" Width="Auto"
+                    Background="{StaticResource BgPanelBrush}" BorderBrush="{StaticResource BorderBrush}" BorderThickness="1,0,0,0"
+                    Visibility="{Binding IsPlaylistVisible, Converter={StaticResource BoolToVisConverter}}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Padding="12,10" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1">
+                        <TextBlock Text="{DynamicResource str_Playlist}" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="SemiBold"/>
+                    </Border>
+                    <ListBox Grid.Row="1" x:Name="PlaylistBox" Style="{StaticResource PlaylistListBox}"
+                             ItemsSource="{Binding Playlist.Items}" SelectedItem="{Binding PlaylistVM.SelectedItem}"
+                             MouseDoubleClick="Playlist_DoubleClick" Padding="6"/>
+                    <Border Grid.Row="2" Padding="8" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0">
+                        <WrapPanel HorizontalAlignment="Center">
+                            <Button Style="{StaticResource TextBtn}" Click="MenuOpen_Click" FontSize="11" Margin="4,0">
+                                <TextBlock Text="{DynamicResource str_Open}" Foreground="{StaticResource AccentLightBrush}"/>
+                            </Button>
+                            <Button Style="{StaticResource TextBtn}" Command="{Binding PlaylistVM.RemoveCommand}" FontSize="11" Margin="4,0">
+                                <TextBlock Text="{DynamicResource str_Remove}" Foreground="{StaticResource TextSecondaryBrush}"/>
+                            </Button>
+                        </WrapPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- INFO BAR -->
+        <Border x:Name="InfoBar" Grid.Row="2" Background="{StaticResource BgPanelBrush}" Padding="16,6"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsPipMode}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding CurrentTitle}" Foreground="{StaticResource TextPrimaryBrush}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="1" Foreground="{StaticResource TextSecondaryBrush}" FontSize="12" VerticalAlignment="Center">
+                    <Run Text="{Binding CurrentTimeStr, Mode=OneWay}"/>
+                    <Run Text=" / "/>
+                    <Run Text="{Binding DurationStr, Mode=OneWay}" Foreground="{StaticResource TextMutedBrush}"/>
+                </TextBlock>
+            </Grid>
+        </Border>
+
+        <!-- CONTROLS BAR -->
+        <Border x:Name="ControlsBar" Grid.Row="3" Background="{StaticResource BgPanelBrush}"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsPipMode}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <StackPanel>
+                <Slider x:Name="SeekBar" Style="{StaticResource SeekSlider}" Margin="16,8,16,4"
+                        Minimum="0" Maximum="{Binding Duration}" Value="{Binding Position, Mode=TwoWay}"
+                        IsMoveToPointEnabled="True"
+                        PreviewMouseDown="SeekBar_PreviewMouseDown" PreviewMouseUp="SeekBar_PreviewMouseUp"/>
+
+                <Grid Margin="12,4,12,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Style="{StaticResource IconBtn}" Command="{Binding ToggleMuteCommand}" ToolTip="{DynamicResource str_Mute}">
+                            <TextBlock Text="{Binding MuteIcon}"/>
+                        </Button>
+                        <Slider Style="{StaticResource VolumeSlider}" Width="90" Margin="4,0"
+                                Minimum="0" Maximum="200" Value="{Binding Volume}" IsMoveToPointEnabled="True"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" MinWidth="260">
+                        <Button Style="{StaticResource IconBtn}" Command="{Binding PrevTrackCommand}" ToolTip="{DynamicResource str_Previous}">⏮</Button>
+                        <Button Style="{StaticResource IconBtn}" Command="{Binding SkipBackCommand}" Margin="4,0" ToolTip="-10s">⏪</Button>
+                        <Button Style="{StaticResource PlayBtn}" Command="{Binding PlayPauseCommand}" Margin="6,0" ToolTip="{DynamicResource str_Play}">
+                            <TextBlock Text="{Binding PlayPauseIcon}" FontSize="18" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+                        <Button Style="{StaticResource IconBtn}" Command="{Binding SkipForwardCommand}" Margin="4,0" ToolTip="+10s">⏩</Button>
+                        <Button Style="{StaticResource IconBtn}" Command="{Binding NextTrackCommand}" ToolTip="{DynamicResource str_Next}">⏭</Button>
+                        <Button Style="{StaticResource IconBtn}" Command="{Binding StopCommand}" Margin="4,0" ToolTip="{DynamicResource str_Stop}">⏹</Button>
+                    </StackPanel>
+
+                    <WrapPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" MaxWidth="480">
+                        <ComboBox Style="{StaticResource DarkCombo}" Width="100" Margin="4,2"
+                                  ItemsSource="{Binding AudioTracks}" SelectedItem="{Binding SelectedAudioTrack}"
+                                  DisplayMemberPath="Name" ToolTip="{DynamicResource str_Audio}"/>
+                        <ComboBox Style="{StaticResource DarkCombo}" Width="100" Margin="4,2"
+                                  ItemsSource="{Binding SubtitleTracks}" SelectedItem="{Binding SelectedSubtitleTrack}"
+                                  DisplayMemberPath="Name" ToolTip="{DynamicResource str_Subtitle}"/>
+                        <Button Style="{StaticResource IconBtn}" Command="{Binding TogglePlaylistCommand}" ToolTip="{DynamicResource str_Playlist}">☰</Button>
+                        <Button Command="{Binding ToggleAlwaysOnTopCommand}" ToolTip="{DynamicResource str_OnTop}">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource IconBtn}">
+                                    <Setter Property="FontSize" Value="14"/>
+                                    <Setter Property="Content" Value="📌"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding AlwaysOnTop}" Value="True">
+                                            <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
+                                            <Setter Property="Background" Value="{StaticResource AccentGlowBrush}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button Style="{StaticResource IconBtn}" Command="{Binding TakeScreenshotCommand}" ToolTip="{DynamicResource str_Screenshot}">📸</Button>
+                        <Button Style="{StaticResource IconBtn}" Command="{Binding ToggleFullscreenCommand}" ToolTip="{DynamicResource str_Fullscreen}">⛶</Button>
+                    </WrapPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

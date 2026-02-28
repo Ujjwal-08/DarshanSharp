@@ -1,0 +1,36 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="str_Open">ખોલો</sys:String>
+    <sys:String x:Key="str_OpenFolder">ફોલ્ડર ખોલો</sys:String>
+    <sys:String x:Key="str_Play">ચલાવો</sys:String>
+    <sys:String x:Key="str_Pause">રોકો</sys:String>
+    <sys:String x:Key="str_Stop">બંધ કરો</sys:String>
+    <sys:String x:Key="str_Previous">પાછળ</sys:String>
+    <sys:String x:Key="str_Next">આગળ</sys:String>
+    <sys:String x:Key="str_Volume">વોલ્યુમ</sys:String>
+    <sys:String x:Key="str_Mute">મ્યૂટ</sys:String>
+    <sys:String x:Key="str_Playlist">પ્લેલિસ્ટ</sys:String>
+    <sys:String x:Key="str_Shuffle">શફલ</sys:String>
+    <sys:String x:Key="str_Repeat">પુનરાવર્તન</sys:String>
+    <sys:String x:Key="str_Speed">ઝડપ</sys:String>
+    <sys:String x:Key="str_Audio">ઓડિઓ ટ્રેક</sys:String>
+    <sys:String x:Key="str_Subtitle">સબ ટાઇટલ</sys:String>
+    <sys:String x:Key="str_LoadSub">સબ ટાઇટલ લોડ કરો</sys:String>
+    <sys:String x:Key="str_Screenshot">સ્ક્રીનશૉટ</sys:String>
+    <sys:String x:Key="str_OnTop">હંમેશા ઉપર</sys:String>
+    <sys:String x:Key="str_Fullscreen">પૂર્ણ સ્ક્રીન</sys:String>
+    <sys:String x:Key="str_AspectRatio">આસ્પેક્ટ રેશ્યો</sys:String>
+    <sys:String x:Key="str_SleepTimer">સ્લીપ ટાઇમર</sys:String>
+    <sys:String x:Key="str_Cancel">રદ કરો</sys:String>
+    <sys:String x:Key="str_Recent">તાજેતરની ફાઇલો</sys:String>
+    <sys:String x:Key="str_Language">ભાષા</sys:String>
+    <sys:String x:Key="str_NoMedia">કોઈ મીડિયા નથી</sys:String>
+    <sys:String x:Key="str_ClearPlaylist">સ્પષ્ટ</sys:String>
+    <sys:String x:Key="str_Remove">દૂર કરો</sys:String>
+    <sys:String x:Key="str_5min">5 મિનિટ</sys:String>
+    <sys:String x:Key="str_10min">10 મિનિટ</sys:String>
+    <sys:String x:Key="str_15min">15 મિનિટ</sys:String>
+    <sys:String x:Key="str_30min">30 મિનિટ</sys:String>
+    <sys:String x:Key="str_60min">60 મિનિટ</sys:String>
+</ResourceDictionary>
